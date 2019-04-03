@@ -1,0 +1,21 @@
+sudo: true
+dist: trusty
+language: bash
+
+jobs:
+  include:
+    - stage: build image
+      script:
+        - if [ "$TRAVIS_BRANCH" == "master" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
+            TAG=v`date +"%Y%m%d"`;
+            docker run --rm --privileged multiarch/qemu-user-static:register --reset;
+            docker build . -t colachen/caddy-rpi:latest -t colachen/caddy-rpi:$TAG;
+            echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin;
+            docker push colachen/caddy-rpi:$TAG;
+            docker push colachen/caddy-rpi:latest;
+          fi
+
+    - stage: test image
+      script:
+        - docker run --rm --privileged multiarch/qemu-user-static:register --reset
+        - docker run --rm colachen/caddy-rpi -v
