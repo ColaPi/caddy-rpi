@@ -1,4 +1,4 @@
-FROM resin/raspberrypi3-alpine
+FROM balenalib/armv7hf-alpine
 
 ARG CADDY_VER=0.11.5
 ARG CADDY_URL=https://github.com/mholt/caddy/releases/download/v${CADDY_VER}/caddy_v${CADDY_VER}_linux_arm7.tar.gz
