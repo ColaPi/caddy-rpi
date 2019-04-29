@@ -1,6 +1,6 @@
 FROM balenalib/armv7hf-alpine:latest-run
 
-ARG CADDY_VER=0.11.5
+ARG CADDY_VER=1.0.0
 ARG CADDY_URL=https://github.com/mholt/caddy/releases/download/v${CADDY_VER}/caddy_v${CADDY_VER}_linux_arm7.tar.gz
 ARG CADDY_AUTO=https://getcaddy.com 
 
